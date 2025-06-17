@@ -3,7 +3,11 @@ $rg = Read-Host -Prompt "Resource group the fw policy is in"
 $policyname = Read-Host -Prompt "FW policy name to backup"
 
 # Define the export directory
-$exportDirectory = "C:\temp\fw1"
+$exportDirectory = Read-Host -Prompt "Path to save files to, default is c:\temp\fw1"
+if ([string]::IsNullOrWhiteSpace($exportDirectory))
+{
+$exportDirectory = "c:\temp\fw1"
+}
  
 # Ensure the export directory exists
 if (-not (Test-Path -Path $exportDirectory)) {
@@ -27,10 +31,12 @@ if (-not (Test-Path -Path $exportDirectory)) {
                 
                 $Rules = [PSCustomObject]@{
                     RuleCollectionGroupName = $rulecolgroup.Name;
+                    RuleCollectionGroupPriority = $rulecolgroup.Properties.Priority;
                     RuleCollectionName = $rulecol.Name;
                     Name                = $rule.Name
                     RuleType            = $rule.ruletype
                     Priority            = $rulecol.Priority
+                    ActionType          = $rulecol.Action.Type;
                     TranslatedPort      = $rule.TranslatedPort
                     TranslatedAddress   = $rule.TranslatedAddress
                     TerminateTLS        = $rule.TerminateTLS
@@ -45,7 +51,7 @@ if (-not (Test-Path -Path $exportDirectory)) {
                     DestinationIpGroups = ($rule.DestinationIpGroups -join ",")
                     DestinationPorts    = ($rule.DestinationPorts -join ",")
                     DestinationFqdns    = ($rule.DestinationFqdns -join ",")
-                    SubscriptionName    = $subscription.SubscriptionId
+                    
                 }            
                 $biglist += $Rules            
                 
