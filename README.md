@@ -4,3 +4,4 @@ These powershell scripts will take any Dnat, network and application rules and c
 The restore script parses the files and creates the rules in the specified policy, there is also an option to create a new policy to restore to. You will be prompted to create a new policy and for the resource group name and policy name to restore to.
 
 The azfwruledump script just grabs all rules and saves them to a single .CSV file.
+Azfwruledumprestore uses the single dump file to restore/edit rules from.
