@@ -1,7 +1,3 @@
-# Combined Firewall Policy Restore Script
-# Uses individual CSV files for network, application, and NAT rules
-# Incorporates advanced logic from azfwruledumprestore.ps1
-
 # Prompt for policy creation/restoration
 $answer = Read-Host "Do you want a new FW policy created to restore to, y/n?"
 if ($answer -eq 'y') {
@@ -212,3 +208,4 @@ foreach ($file in Get-ChildItem "$savepath\*-dnatrules.csv" -File) {
 }
 
 Write-Host "Firewall policy restore completed."
+
