@@ -8,6 +8,10 @@ if ([string]::IsNullOrWhiteSpace($savepath))
 {
 $savepath = "c:\temp"
 }
+# Ensure the export directory exists
+if (-not (Test-Path -Path $savepath)) {
+    New-Item -Path $savepath -ItemType Directory -Force
+}
 
 $colgroups = Get-AzFirewallPolicy -Name $policyname -ResourceGroupName $rg
 foreach ($colgroup in $colgroups.RuleCollectionGroups)
@@ -123,3 +127,4 @@ foreach ($colgroup in $colgroups.RuleCollectionGroups)
     }
     
 }
+
