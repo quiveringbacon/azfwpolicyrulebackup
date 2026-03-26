@@ -128,18 +128,7 @@ foreach ($colgroup in $colgroups.RuleCollectionGroups)
         
     }
     
-    # Export IP Groups used in this rule collection group
-    foreach ($rulecol in $rulecolgroup.Properties.RuleCollection) {
-        foreach ($rule in $rulecol.rules) {
-            # Collect all IP group IDs from the rule
-            $allIPGroups = @()
-            if ($rule.SourceIPGroups) {
-                $allIPGroups += $rule.SourceIPGroups
-            }
-            if ($rule.DestinationIPGroups) {
-                $allIPGroups += $rule.DestinationIPGroups
-            }
-            
+    
             # Export IP Groups used in this rule collection group
 foreach ($rulecol in $rulecolgroup.Properties.RuleCollection) {
     foreach ($rule in $rulecol.rules) {
@@ -198,6 +187,5 @@ foreach ($rulecol in $rulecolgroup.Properties.RuleCollection) {
     }
 }
         }
-    }
     
-}
+    
